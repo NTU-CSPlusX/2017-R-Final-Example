@@ -98,8 +98,10 @@ power.gdp <- inner_join(power.df3, gdp.df3, c("year", "id2")) %>%
   as.data.frame()
 
 library(ggplot2)
-ggplot(power.gdp, aes(x = name, y = eff)) +
+ggplot(power.gdp %>% select(行業別 = name, "效率(新台幣百萬元/度)" = eff), aes(x = 行業別, y = `效率(新台幣百萬元/度)`)) +
   geom_bar(stat = "identity") +
-  theme_grey(base_family="STKaiti")
+  theme_grey(base_family="STKaiti") +
+  theme(axis.text.x = element_text(angle = 90, size = 12))
 
 sessionInfo()
+
